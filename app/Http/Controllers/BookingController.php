@@ -7,13 +7,15 @@ use Illuminate\Http\Request;
 
 class BookingController extends Controller
 {
+    // Create function for view 
     public function create($room_id)
     {
         $room = Room::findOrFail($room_id);
         return view('bookings.create', compact('room'));
     }
 
-    public function store(Request $request)
+    // store function for create booking
+        public function store(Request $request)
     {
         $request->validate([
             'room_id' => 'required|exists:rooms,id',
@@ -27,6 +29,7 @@ class BookingController extends Controller
         return redirect()->route('rooms.index')->with('success', 'Room booked successfully.');
     }
 
+    //delete for booking
     public function destroy($id)
     {
         $booking = Booking::find($id);
